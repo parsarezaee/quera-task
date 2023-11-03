@@ -37,5 +37,5 @@ def user_login(request):
             else:
                 messages.error(request, 'Invalid username or password. Please try again.')
     else:
-        messages.error(request, 'Invalid form data. Please correct the errors.')
+        form = LoginForm()
     return render(request, 'registration/login.html', {'form': form})

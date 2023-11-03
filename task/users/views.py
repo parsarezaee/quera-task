@@ -1,6 +1,8 @@
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from .forms import RegistrationForm, LoginForm
+from django.contrib import messages
+
 
 
 def home(request):
@@ -32,6 +34,8 @@ def user_login(request):
             if user is not None:
                 login(request, user)
                 return redirect('home')
+            else:
+                messages.error(request, 'Invalid username or password. Please try again.')
     else:
-        form = LoginForm()
+        messages.error(request, 'Invalid form data. Please correct the errors.')
     return render(request, 'registration/login.html', {'form': form})

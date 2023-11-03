@@ -11,7 +11,8 @@ services:
       - static_volume:/task/static
       - media_volume:/task/media
     depends_on:
-      - postgres_db
+      postgres_db:
+        condition: service_healthy
     ports:
       - "8000:8000"
 
@@ -24,7 +25,9 @@ services:
       - POSTGRES_PASSWORD=tasksecret
       - POSTGRES_DB=cms
     volumes:
-      - ./data/postgres:/var/lib/postgresql
+      - ./data/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: "exit 0"
 
 
 volumes:

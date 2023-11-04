@@ -8,8 +8,8 @@ services:
     restart: always
     volumes:
       - .:/task/src
-      - static_volume:/task/static
-      - media_volume:/task/media
+      - ./static_volume:/task/static
+      - ./media_volume:/task/media
     depends_on:
       postgres_db:
         condition: service_healthy
@@ -28,9 +28,3 @@ services:
       - ./data/postgres:/var/lib/postgresql/data
     healthcheck:
       test: "exit 0"
-
-
-volumes:
-  postgres:
-  static_volume:
-  media_volume:

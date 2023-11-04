@@ -3,12 +3,15 @@ from rest_framework.permissions import IsAuthenticated
 from .models import Transaction
 from .serializers import TransactionSerializer
 from django.core.exceptions import PermissionDenied
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 
 class TransactionListAPIView(generics.ListCreateAPIView):
     serializer_class = TransactionSerializer
     permission_classes = [IsAuthenticated]
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['date', 'category']
 
     def get_queryset(self):
         # Filter transactions based on the currently authenticated user

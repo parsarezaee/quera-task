@@ -66,6 +66,9 @@ class TransactionDeleteAPIView(generics.DestroyAPIView):
 
 
 class CashFlowAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [JSONWebTokenAuthentication]
+
     def get(self, request, *args, **kwargs):
         # Get the specified date from query parameters
         date_string = request.query_params.get('date')

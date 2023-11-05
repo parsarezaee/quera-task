@@ -20,6 +20,9 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 
         if password1 != password2:
             raise serializers.ValidationError("Passwords do not match.")
+        
+        if User.objects.filter(username=username).exists():
+            raise serializers.ValidationError("A user with this username already exists.")
 
         user = User(username=username)
         user.set_password(password1)

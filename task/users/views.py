@@ -34,6 +34,7 @@ def user_login(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
+                ## You can use this handler when you want to get token in postman or ...
                 # jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
                 # jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
                 # payload = jwt_payload_handler(user)

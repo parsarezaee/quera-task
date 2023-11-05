@@ -1,9 +1,10 @@
 from django.urls import path
-from . import views
+from .views import *
 
 
 urlpatterns = [
-    path('list/', views.TransactionListAPIView.as_view(), name='transaction_list'),
-    path('update/<int:pk>/', views.TransactionUpdateAPIView.as_view(), name='transaction_update'),
-    path('delete/<int:pk>/', views.TransactionDeleteAPIView.as_view(), name='transaction_delete')
+    path('list/', TransactionListAPIView.as_view(), name='transaction_list'),
+    path('update/<int:pk>/', TransactionUpdateAPIView.as_view(), name='transaction_update'),
+    path('delete/<int:pk>/', TransactionDeleteAPIView.as_view(), name='transaction_delete'),
+    path('report/', CashFlowAPIView.as_view(), name='cash-flow')
 ]

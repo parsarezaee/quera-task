@@ -4,12 +4,14 @@ from .models import Transaction
 from .serializers import TransactionSerializer
 from django.core.exceptions import PermissionDenied
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 
 
 class TransactionListAPIView(generics.ListCreateAPIView):
     serializer_class = TransactionSerializer
     permission_classes = [IsAuthenticated]
+    authentication_classes = [JSONWebTokenAuthentication]
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['date', 'category']
 
@@ -25,6 +27,8 @@ class TransactionListAPIView(generics.ListCreateAPIView):
 class TransactionUpdateAPIView(generics.RetrieveUpdateAPIView):
     serializer_class = TransactionSerializer
     permission_classes = [IsAuthenticated]
+    authentication_classes = [JSONWebTokenAuthentication]
+
 
     def get_queryset(self):
         # Filter transactions based on the currently authenticated user
@@ -42,6 +46,8 @@ class TransactionUpdateAPIView(generics.RetrieveUpdateAPIView):
 class TransactionDeleteAPIView(generics.DestroyAPIView):
     serializer_class = TransactionSerializer
     permission_classes = [IsAuthenticated]
+    authentication_classes = [JSONWebTokenAuthentication]
+
 
     def get_queryset(self):
         # Filter transactions based on the currently authenticated user

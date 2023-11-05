@@ -1,0 +1,13 @@
+static_volume/
+static_volume/*
+media_volume/
+media_volume/*
+
+
+
+data/
+data/*
+postgres/
+/postgres/*
+postgres_data/
+/postgres_data/*

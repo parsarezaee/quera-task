@@ -34,6 +34,11 @@ def user_login(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
+                # jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
+                # jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
+                # payload = jwt_payload_handler(user)
+                # token = jwt_encode_handler(payload)
+                # return JsonResponse({'token': token})
                 return JsonResponse({'message': 'Login successful'})
             else:
                 return JsonResponse({'error': 'Invalid username or password'}, status=401)

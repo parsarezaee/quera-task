@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'rest_framework_jwt',
     'django_filters',
 
     'users.apps.UsersConfig',
@@ -133,6 +134,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.CustomUser'
 
-LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = "home"
+# LOGIN_REDIRECT_URL = 'home'
+# LOGOUT_REDIRECT_URL = "home"
 

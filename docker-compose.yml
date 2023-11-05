@@ -11,8 +11,7 @@ services:
       - ./static_volume:/task/static
       - ./media_volume:/task/media
     depends_on:
-      postgres_db:
-        condition: service_healthy
+      - postgres_db
     ports:
       - "8000:8000"
 
@@ -26,8 +25,3 @@ services:
       - POSTGRES_DB=cms
     volumes:
       - ./data/postgres:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U root -d cms"]
-      interval: 10s
-      timeout: 5s
-      retries: 5

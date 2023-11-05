@@ -1,29 +1,30 @@
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from .forms import RegistrationForm, LoginForm
+from .serializers import UserRegistrationSerializer
+from rest_framework import status
 from django.contrib import messages
+from rest_framework_jwt.settings import api_settings
+from django.contrib.auth import authenticate, login
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.response import Response
+from rest_framework.generics import CreateAPIView
 
 
 
-def home(request):
-    return render(request, 'home.html')
+class UserRegistrationAPIView(CreateAPIView):
+    serializer_class = UserRegistrationSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            self.perform_create(serializer)
+            return Response({'message': 'User registered successfully'}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-def register(request):
-    if request.method == 'POST':
-        form = RegistrationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=password)
-            login(request, user)
-            return redirect('home')
-    else:
-        form = RegistrationForm()
-    return render(request, 'registration/register.html', {'form': form})
-
-
+@csrf_exempt
 def user_login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -33,9 +34,7 @@ def user_login(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('home')
+                return JsonResponse({'message': 'Login successful'})
             else:
-                messages.error(request, 'Invalid username or password. Please try again.')
-    else:
-        form = LoginForm()
-    return render(request, 'registration/login.html', {'form': form})
+                return JsonResponse({'error': 'Invalid username or password'}, status=401)
+    return JsonResponse({'error': 'Invalid request'}, status=400)

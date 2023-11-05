@@ -1,0 +1,199 @@
+{
+	"info": {
+		"_postman_id": "bfa9628b-f364-49fd-a4ad-d1d6bf43a15a",
+		"name": "Quera",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28446039"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "reza",
+									"type": "text"
+								},
+								{
+									"key": "password1",
+									"value": "1234",
+									"type": "text"
+								},
+								{
+									"key": "password2",
+									"value": "1234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{ host }}/register/",
+							"host": [
+								"{{ host }}"
+							],
+							"path": [
+								"register",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "amir",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{ host }}/login/",
+							"host": [
+								"{{ host }}"
+							],
+							"path": [
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transactions",
+			"item": [
+				{
+					"name": "ListCreateAPI",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "jwt {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{ host }}/transactions/list/",
+							"host": [
+								"{{ host }}"
+							],
+							"path": [
+								"transactions",
+								"list",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "jwt {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/transactions/update/<int:pk>/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"transactions",
+								"update",
+								"<int:pk>",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "jwt \"{{token}}\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/transactions/delete/<int:pk>/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"transactions",
+								"delete",
+								"<int:pk>",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "report",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "jwt {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/transactions/report/?date",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"transactions",
+								"report",
+								""
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
